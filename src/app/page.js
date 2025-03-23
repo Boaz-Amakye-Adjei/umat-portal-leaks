@@ -72,7 +72,9 @@ export default function Home() {
 
         <section className="md:px-[55px] md:py-5 py-[30px] px-[10px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
           {data.length > 0 ? (
-            data.flat().map((data) => <Card data={data} />)
+            data
+              .flat()
+              .map((data) => <Card data={data} key={data.StudentNumber} />)
           ) : (
             <p>fetching data...</p>
           )}
