@@ -103,8 +103,10 @@ export default function Home() {
           filteredData.map((student) => (
             <Card data={student} key={student.StudentNumber} />
           ))
-        ) : (
+        ) : data.length > 0 ? (
           <p className="text-center w-full">No results found...</p>
+        ) : (
+          <p className="text-center w-full">Fetching Data...</p>
         )}
       </section>
     </div>
