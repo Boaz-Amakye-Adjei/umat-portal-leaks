@@ -90,32 +90,30 @@ function Card({ data }) {
     "https://portal.umat.edu.gh//Content/FileDirectory/Student-Pictures/";
 
   const [formatIndex, setFormatIndex] = useState(0);
-  const [bgImage, setBgImage] = useState(
-    `url(${baseUrl}${data.StudentNumber}.${imgFormats[0]})`
+  const [imgSrc, setImgSrc] = useState(
+    `${baseUrl}${data.StudentNumber}.${imgFormats[0]}`
   );
 
   const handleImageError = () => {
     if (formatIndex < imgFormats.length - 1) {
       const nextFormat = formatIndex + 1;
       setFormatIndex(nextFormat);
-      setBgImage(
-        `url(${baseUrl}${data.StudentNumber}.${imgFormats[nextFormat]})`
-      );
+      setImgSrc(`${baseUrl}${data.StudentNumber}.${imgFormats[nextFormat]}`);
     } else {
       // If all formats fail, set a default placeholder image
-      setBgImage("url('/placeholder.jpg')");
+      setImgSrc("/placeholder.jpg");
     }
   };
 
   return (
     <div className="bg-white shadow-2xl rounded-[20px] p-[20px] max-w-[300px] flex justify-center items-center flex-col">
-      {/* Image as background */}
-      <div
-        id="img"
-        className="w-[150px] h-[150px] rounded-full bg-gray-300 mb-[8px] bg-cover bg-center"
-        style={{ backgroundImage: bgImage }}
-        onError={handleImageError} // Not supported for div background, so error handling must be improved if needed
-      ></div>
+      {/* Image as an <img> so that onError works */}
+      <img
+        src={imgSrc}
+        alt="Student"
+        className="w-[150px] h-[150px] rounded-full bg-gray-300 mb-[8px] object-cover"
+        onError={handleImageError} // Works correctly on <img>
+      />
 
       {/* User details */}
       <div className="flex justify-center items-center flex-col">
