@@ -119,3 +119,6 @@
   }
 }
 
+#small-screen-navbar {
+  height: calc(100svh - 200px);
+}
