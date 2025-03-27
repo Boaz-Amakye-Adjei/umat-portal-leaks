@@ -1,33 +1,31 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { IoSearchSharp } from "react-icons/io5";
 import Search from "./components/search";
 import RenderCards from "./components/RenderCards";
+import { useQuery } from "@tanstack/react-query";
+
+async function getData() {
+  console.log("Fetching data...");
+  const response = await axios.get(
+    "https://portal.umat.edu.gh/api-v1/live/admissions/api/Util/GetAdmissionBatch"
+  );
+  console.log(response.data.flat());
+  return response.data.flat(); // Flatten array
+}
 
 export default function Home() {
-  const [data, setData] = useState([]); // Stores original fetched data
   const [filteredData, setFilteredData] = useState([]); // Data shown in UI
   const [searchQuery, setSearchQuery] = useState(""); // Search input state
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        console.log("Fetching data...");
-        const response = await axios.get(
-          "https://portal.umat.edu.gh/api-v1/live/admissions/api/Util/GetAdmissionBatch"
-        );
-        const flattenedData = response.data.flat(); // Flatten array
-        setData(flattenedData);
-        setFilteredData(flattenedData); // Initialize displayed data
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
-
-    getData();
-  }, []);
+  const { data, _, isLoading } = useQuery({
+    //  data, error , isLoading
+    queryKey: ["Admission Batch"],
+    queryFn: getData,
+    staleTime: Infinity, // Data never becomes stale
+    cacheTime: Infinity, // Keep cache forever
+  });
 
   return (
     <div>
@@ -57,7 +55,11 @@ export default function Home() {
       />
 
       {/* Student List */}
-      <RenderCards filteredData={filteredData} data={data} />
+      <RenderCards
+        filteredData={filteredData}
+        data={data}
+        isLoading={isLoading}
+      />
     </div>
   );
 }

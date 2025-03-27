@@ -8,29 +8,32 @@ export default function Search({
   data,
 }) {
   useEffect(() => {
-    if (searchQuery.trim() === "") {
-      setFilteredData(data); // Restore full list if input is cleared
-      return;
+    if (data) {
+      if (searchQuery.trim() === "") {
+        setFilteredData(data); // Restore full list if input is cleared
+        console.log("this runs");
+        return;
+      }
+
+      const lowerCaseQuery = searchQuery.toLowerCase();
+
+      const filteredResults = data.filter((student) => {
+        const firstName = student.FirstName?.toLowerCase() || "";
+        const lastName = student.LastName?.toLowerCase() || "";
+        const fullName = student.FullName?.toLowerCase() || "";
+        const applicantFullName =
+          student.ApplicatantFullName?.toLowerCase() || "";
+
+        return (
+          firstName.includes(lowerCaseQuery) ||
+          lastName.includes(lowerCaseQuery) ||
+          fullName.includes(lowerCaseQuery) ||
+          applicantFullName.includes(lowerCaseQuery)
+        );
+      });
+
+      setFilteredData(filteredResults);
     }
-
-    const lowerCaseQuery = searchQuery.toLowerCase();
-
-    const filteredResults = data.filter((student) => {
-      const firstName = student.FirstName?.toLowerCase() || "";
-      const lastName = student.LastName?.toLowerCase() || "";
-      const fullName = student.FullName?.toLowerCase() || "";
-      const applicantFullName =
-        student.ApplicatantFullName?.toLowerCase() || "";
-
-      return (
-        firstName.includes(lowerCaseQuery) ||
-        lastName.includes(lowerCaseQuery) ||
-        fullName.includes(lowerCaseQuery) ||
-        applicantFullName.includes(lowerCaseQuery)
-      );
-    });
-
-    setFilteredData(filteredResults);
   }, [searchQuery, data]); // Runs when searchQuery or data changes
 
   return (
