@@ -1,60 +1,8 @@
 "use client";
-
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import Search from "./components/search";
-import RenderCards from "./components/RenderCards";
-import PaginationComponent from "./components/pagination/pagination";
+import { Suspense } from "react";
+import StudentList from "./components/studentList";
 
 export default function Home() {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
-
-  // Extract page and limit from URL or use defaults
-  const page = parseInt(searchParams.get("page")) || 1;
-  const limit = parseInt(searchParams.get("limit")) || 12;
-
-  const [students, setStudents] = useState([]);
-  const [totalPages, setTotalPages] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setIsError] = useState(false);
-
-  useEffect(() => {
-    const fetchStudents = async () => {
-      try {
-        setIsLoading(true);
-        setIsError(false);
-
-        const response = await fetch(`/api/data?page=${page}&limit=${limit}`);
-        const data = await response.json();
-
-        if (response.ok) {
-          setStudents(data.data);
-          setTotalPages(data.totalPages);
-        } else {
-          console.error("Error fetching students:", data.error);
-          setIsError(true);
-        }
-      } catch (error) {
-        console.error("Network error:", error);
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchStudents();
-  }, [page, limit]); // Refetch when page or limit changes
-
-  // Function to update the URL search parameters without reloading
-  const updatePage = (newPage) => {
-    const params = new URLSearchParams(searchParams);
-    params.set("page", newPage);
-
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-  };
-
   return (
     <div className="mb-[50px]">
       {/* Hero Section */}
@@ -74,18 +22,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Search Box */}
-      <Search />
-
-      {/* Student List */}
-      <RenderCards students={students} isLoading={isLoading} error={error} />
-
-      {/* Pagination */}
-      <PaginationComponent
-        currentPage={page}
-        totalPages={totalPages}
-        onPageChange={updatePage}
-      />
+      <Suspense fallback={<p>Loading...</p>}>
+        <StudentList />
+      </Suspense>
     </div>
   );
 }
