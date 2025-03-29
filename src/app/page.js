@@ -1,34 +1,62 @@
 "use client";
 
-import { useState } from "react";
-import axios from "axios";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import Search from "./components/search";
 import RenderCards from "./components/RenderCards";
-import { useQuery } from "@tanstack/react-query";
-
-async function getData() {
-  console.log("Fetching data...");
-  const response = await axios.get(
-    "https://portal.umat.edu.gh/api-v1/live/admissions/api/Util/GetAdmissionBatch"
-  );
-  console.log(response.data.flat());
-  return response.data.flat(); // Flatten array
-}
+import PaginationComponent from "./components/pagination/pagination";
 
 export default function Home() {
-  const [filteredData, setFilteredData] = useState([]); // Data shown in UI
-  const [searchQuery, setSearchQuery] = useState(""); // Search input state
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
-  const { data, _, isLoading } = useQuery({
-    //  data, error , isLoading
-    queryKey: ["Admission Batch"],
-    queryFn: getData,
-    staleTime: Infinity, // Data never becomes stale
-    cacheTime: Infinity, // Keep cache forever
-  });
+  // Extract page and limit from URL or use defaults
+  const page = parseInt(searchParams.get("page")) || 1;
+  const limit = parseInt(searchParams.get("limit")) || 12;
+
+  const [students, setStudents] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setIsError] = useState(false);
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        setIsLoading(true);
+        setIsError(false);
+
+        const response = await fetch(`/api/data?page=${page}&limit=${limit}`);
+        const data = await response.json();
+
+        if (response.ok) {
+          setStudents(data.data);
+          setTotalPages(data.totalPages);
+        } else {
+          console.error("Error fetching students:", data.error);
+          setIsError(true);
+        }
+      } catch (error) {
+        console.error("Network error:", error);
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchStudents();
+  }, [page, limit]); // Refetch when page or limit changes
+
+  // Function to update the URL search parameters without reloading
+  const updatePage = (newPage) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", newPage);
+
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  };
 
   return (
-    <div>
+    <div className="mb-[50px]">
       {/* Hero Section */}
       <section className="h-[400px]">
         <div className="flex justify-center items-center flex-col md:flex-row w-full px-[30px] py-[10px] gap-[10px] md:gap-[50px] h-full relative bg-cover bg-center">
@@ -47,18 +75,16 @@ export default function Home() {
       </section>
 
       {/* Search Box */}
-      <Search
-        searchQuery={searchQuery}
-        setFilteredData={setFilteredData}
-        setSearchQuery={setSearchQuery}
-        data={data}
-      />
+      <Search />
 
       {/* Student List */}
-      <RenderCards
-        filteredData={filteredData}
-        data={data}
-        isLoading={isLoading}
+      <RenderCards students={students} isLoading={isLoading} error={error} />
+
+      {/* Pagination */}
+      <PaginationComponent
+        currentPage={page}
+        totalPages={totalPages}
+        onPageChange={updatePage}
       />
     </div>
   );

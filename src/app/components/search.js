@@ -1,40 +1,35 @@
 import { IoSearchSharp } from "react-icons/io5";
 import { useEffect } from "react";
 
-export default function Search({
-  setSearchQuery,
-  searchQuery,
-  setFilteredData,
-  data,
-}) {
-  useEffect(() => {
-    if (data) {
-      if (searchQuery.trim() === "") {
-        setFilteredData(data); // Restore full list if input is cleared
-        console.log("this runs");
-        return;
-      }
+export default function Search() {
+  // useEffect(() => {
+  //   if (data) {
+  //     if (searchQuery.trim() === "") {
+  //       setFilteredData(data); // Restore full list if input is cleared
+  //       console.log("this runs");
+  //       return;
+  //     }
 
-      const lowerCaseQuery = searchQuery.toLowerCase();
+  //     const lowerCaseQuery = searchQuery.toLowerCase();
 
-      const filteredResults = data.filter((student) => {
-        const firstName = student.FirstName?.toLowerCase() || "";
-        const lastName = student.LastName?.toLowerCase() || "";
-        const fullName = student.FullName?.toLowerCase() || "";
-        const applicantFullName =
-          student.ApplicatantFullName?.toLowerCase() || "";
+  //     const filteredResults = data.filter((student) => {
+  //       const firstName = student.FirstName?.toLowerCase() || "";
+  //       const lastName = student.LastName?.toLowerCase() || "";
+  //       const fullName = student.FullName?.toLowerCase() || "";
+  //       const applicantFullName =
+  //         student.ApplicatantFullName?.toLowerCase() || "";
 
-        return (
-          firstName.includes(lowerCaseQuery) ||
-          lastName.includes(lowerCaseQuery) ||
-          fullName.includes(lowerCaseQuery) ||
-          applicantFullName.includes(lowerCaseQuery)
-        );
-      });
+  //       return (
+  //         firstName.includes(lowerCaseQuery) ||
+  //         lastName.includes(lowerCaseQuery) ||
+  //         fullName.includes(lowerCaseQuery) ||
+  //         applicantFullName.includes(lowerCaseQuery)
+  //       );
+  //     });
 
-      setFilteredData(filteredResults);
-    }
-  }, [searchQuery, data]); // Runs when searchQuery or data changes
+  //     setFilteredData(filteredResults);
+  //   }
+  // }, [searchQuery, data]); // Runs when searchQuery or data changes
 
   return (
     <div className="h-[190px] flex justify-center items-center w-full">
@@ -47,8 +42,8 @@ export default function Search({
             <input
               type="text"
               className="px-[10px] py-[20px] flex-grow"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)} // Updates search state
+              // value={searchQuery}
+              // Updates search state
               placeholder="Search here..."
             />
             <button className="p-[20px]">
@@ -60,3 +55,10 @@ export default function Search({
     </div>
   );
 }
+
+// {
+//   setSearchQuery,
+//   searchQuery,
+//   setFilteredData,
+//   data,
+// }
