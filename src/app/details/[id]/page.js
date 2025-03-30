@@ -65,8 +65,8 @@ export default function DetailPage() {
           </h3>
         </div>
 
-        <div className="bg-white shadow-2xl mt-[20px] md:mt-0 flex-grow p-3">
-          <h2 className="font-bold text-xl my-2">Personal information</h2>
+        <div className="bg-white shadow-2xl mt-[20px] md:mt-0 flex-grow p-[25px]">
+          <h2 className="font-bold text-xl py-[20px]">Personal information</h2>
           <InfoSpace title="Name" info={data.ApplicatantFullName} />
           <InfoSpace
             title="Gender"
@@ -75,7 +75,7 @@ export default function DetailPage() {
           <InfoSpace title="Date of Birth" info={data.DateOfBirth} />
 
           <hr />
-          <h2 className="font-bold text-xl my-2">Contact information</h2>
+          <h2 className="font-bold text-xl py-[20px]">Contact information</h2>
           <InfoSpace title="Email" info={data.Email} />
           <InfoSpace title="Phone Number" info={data.PrimaryNumber} />
           <InfoSpace title="Other Phone Number" info={data.OtherNumber} />
@@ -86,8 +86,62 @@ export default function DetailPage() {
           <InfoSpace title="Postal Address" info={data.AddressLine1} />
           <InfoSpace title="Ghana Post Address" info={data.GhanaPostCode} />
           <hr />
-          <h2 className="font-bold text-xl my-2">Admission information</h2>
+          <h2 className="font-bold text-xl py-[20px]">Admission information</h2>
           <InfoSpace title="Application ID" info={data.ApplicationId} />
+          <InfoSpace title="Application Year" info={data.ApplicationYear} />
+          <InfoSpace title="Application Date" info={data.AdmittedDate} />
+          <InfoSpace title="Application Batch" info={data.AdmittedBatch} />
+          <InfoSpace title="Form Pin Code" info={data.FormPinCode} />
+
+          <hr />
+          <h2 className="font-bold text-xl py-[20px]">Academic information</h2>
+          <InfoSpace title="Reference Number" info={data.StudentNumber} />
+          <InfoSpace title="Campus" info={data.Campus} />
+          <InfoSpace title="Programme" info={data.ProgrammeFullName} />
+          <InfoSpace title="Programme Code" info={data.ProgrammeCode} />
+          <InfoSpace title="Programme Funding" info={data.ProgrammeFunding} />
+          <InfoSpace
+            title="Academic Year"
+            info={data.AcademicYearForStudentLevel}
+          />
+          <InfoSpace
+            title="Semester For Student Level"
+            info={data.SemesterForStudentLevel}
+          />
+          <InfoSpace
+            title="Minimum Passed Credit"
+            info={data.MinimumPassedCredit}
+          />
+          <InfoSpace title="Maximum Credit" info={data.MaximumCredit} />
+
+          <hr />
+          <h2 className="font-bold text-xl py-[20px]">
+            Residential information
+          </h2>
+          <InfoSpace title="Hall of Residence" info={data.Hall} />
+          <InfoSpace title="Residential Status" info={data.ResidentialStatus} />
+
+          <hr />
+          <h2 className="font-bold text-xl py-[20px]">
+            Additional information
+          </h2>
+          <InfoSpace title="Guardian ID" info={data.GuardianId} />
+          <InfoSpace title="Place of Birth" info={data.PlaceOfBirth} />
+          <InfoSpace title="Home Town" info={data.City} />
+          <InfoSpace title="Region ID" info={data.RegionId} />
+          <InfoSpace title="Denomination ID" info={data.DenominationId} />
+
+          <hr className="my-3" />
+
+          <div className="flex gap-3 py-[20px] flex-col md:flex-row">
+            <button className="py-2 px-3 rounded  hover:bg-green-200 bg-green-600 text-white cursor-pointer delay-75">
+              Submit Petition
+            </button>
+
+            <button className="py-2 px-3 rounded border-[grey] border-soild border  text-black cursor-pointer delay-75">
+              Send an Email to the School Administrator
+            </button>
+          </div>
         </div>
       </section>
     </div>
