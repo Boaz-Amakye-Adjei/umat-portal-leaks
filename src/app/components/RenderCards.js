@@ -22,7 +22,7 @@ export default function RenderCards({ students, isLoading, error }) {
   };
 
   if (isLoading) {
-    return <p className="text-center w-full">Fetching Data...</p>;
+    return <p className="text-center w-full min-h-[500px]">Fetching Data...</p>;
   }
 
   if (error) {
@@ -36,7 +36,10 @@ export default function RenderCards({ students, isLoading, error }) {
   }
 
   return (
-    <article className="md:px-[55px] md:py-5 py-[30px] px-[10px] max-w-[1227px] lg:mx-auto">
+    <article
+      id="rc"
+      className="md:px-[55px] md:py-5 py-[30px] px-[10px] max-w-[1227px] lg:mx-auto min-h-[150px]"
+    >
       <div className="flex justify-end items-center pb-[10px]">
         <Input
           className="w-[50px] bg-white py-2"

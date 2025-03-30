@@ -48,7 +48,7 @@ export default function PaginationLive({
         {/* Previous Button */}
         <PaginationItem>
           <PaginationPrevious
-            href="#"
+            href="#rc"
             onClick={() => onPageChange(Math.max(1, currentPage - 1))}
             disabled={currentPage === 1}
           />
@@ -63,7 +63,7 @@ export default function PaginationLive({
           ) : (
             <PaginationItem key={page}>
               <PaginationLink
-                href="#"
+                href="#rc"
                 isActive={currentPage === page}
                 onClick={() => onPageChange(page)}
               >
@@ -76,7 +76,7 @@ export default function PaginationLive({
         {/* Next Button */}
         <PaginationItem>
           <PaginationNext
-            href="#"
+            href="#rc"
             onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
             disabled={currentPage === totalPages}
           />
