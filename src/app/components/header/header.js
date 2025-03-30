@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Header() {
   return (
     <header className="w-full py-4 bg-white ">
-      <div className="max-w-[1227px] lg:mx-auto justify-between flex items-center px-[20px] md:px-[30px] lg:px-[50px]">
+      <div className="max-w-[1377px] lg:mx-auto justify-between flex items-center px-[20px] md:px-[30px] lg:px-[50px]">
         <div>
           <Image src="/umatlogo.jpg" width={30} height={30} alt="UMaT Logo" />
         </div>

@@ -39,7 +39,7 @@ export default function RenderCards({ students, isLoading, error }) {
     <article className="md:px-[55px] md:py-5 py-[30px] px-[10px] max-w-[1227px] lg:mx-auto">
       <div className="flex justify-end items-center pb-[10px]">
         <Input
-          className="w-[50px] bg-white"
+          className="w-[50px] bg-white py-2"
           type="number"
           onChange={(e) => handleValueChange(e.target.value)}
           placeholder="0"
