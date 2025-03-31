@@ -23,7 +23,7 @@ export default function SmallScreenNav() {
         <div
           className={`${
             isopen ? "visible" : "invisible"
-          } absolute bg-white z-50 bottom-[-290px] right-[-20px] p-[20px] delay-100`}
+          } absolute bg-white z-50 bottom-[-290px] right-[-20px] p-[20px] delay-100 transition-all `}
         >
           <ul className="flex flex-col w-[265px] gap-3">
             <Link
