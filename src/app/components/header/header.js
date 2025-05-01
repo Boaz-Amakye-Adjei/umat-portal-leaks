@@ -36,9 +36,12 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <button className="py-2 px-3 rounded  hover:bg-green-200 bg-green-600 text-white cursor-pointer delay-75">
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSe-Xfh6yohyNNfRwm52Q5pcmcoZxmxuNohYNAOB6yln-yGyJw/viewform?usp=header"
+                className="py-2 px-3 rounded  hover:bg-green-200 bg-green-600 text-white cursor-pointer delay-75"
+              >
                 Submit Petition
-              </button>
+              </a>
             </li>
           </ul>
         </nav>

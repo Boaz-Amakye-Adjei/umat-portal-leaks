@@ -43,9 +43,12 @@ export default function SmallScreenNav() {
 
             <li className="border border-solid border-[grey] my-3"></li>
 
-            <button className="px-3 py-2 rounded bg-green-800 text-white">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSe-Xfh6yohyNNfRwm52Q5pcmcoZxmxuNohYNAOB6yln-yGyJw/viewform?usp=header"
+              className="px-3 py-2 rounded bg-green-800 text-white"
+            >
               Submit Petition
-            </button>
+            </a>
           </ul>
         </div>
       </div>

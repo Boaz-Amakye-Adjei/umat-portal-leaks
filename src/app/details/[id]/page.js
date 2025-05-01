@@ -134,13 +134,19 @@ export default function DetailPage() {
           <hr className="my-3" />
 
           <div className="flex gap-3 py-[20px] flex-col md:flex-row">
-            <button className="py-2 px-3 rounded  hover:bg-green-200 bg-green-600 text-white cursor-pointer delay-75">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSe-Xfh6yohyNNfRwm52Q5pcmcoZxmxuNohYNAOB6yln-yGyJw/viewform?usp=header"
+              className="py-2 px-3 rounded  hover:bg-green-200 bg-green-600 text-white cursor-pointer delay-75"
+            >
               Submit Petition
-            </button>
+            </a>
 
-            <button className="py-2 px-3 rounded border-[grey] border-soild border  text-black cursor-pointer delay-75">
+            <a
+              href="mailto:admin@umat.edu.gh?subject=Request to Remove Leaked Data&body=Dear UMaT Administrator,%0D%0A%0D%0AI would like to formally appeal for the removal of my leaked personal data from any publicly accessible records or sources. Please let me know the steps to proceed.%0D%0A%0D%0AThank you.%0D%0A%0D%0ABest regards,"
+              className="py-2 px-3 rounded border-[grey] border border-solid text-black cursor-pointer delay-75 inline-block"
+            >
               Send an Email to the School Administrator
-            </button>
+            </a>
           </div>
         </div>
       </section>
