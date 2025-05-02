@@ -1,0 +1,8 @@
+{
+  "cron": [
+    {
+      "path": "/api/update-cache",
+      "schedule": "0 0 * * *"
+    }
+  ]
+}

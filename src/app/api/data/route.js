@@ -18,12 +18,14 @@ export async function GET(req) {
   const startIndex = (page - 1) * limit;
   const endIndex = startIndex + limit;
   const paginatedData = data.slice(startIndex, endIndex);
+  const totalStudent = data.length;
   const totalPages = Math.ceil(data.length / limit);
 
   return Response.json({
     page,
     limit,
     totalPages,
+    totalStudent,
     data: paginatedData,
   });
 }

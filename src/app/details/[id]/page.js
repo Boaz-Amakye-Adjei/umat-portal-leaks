@@ -156,9 +156,19 @@ export default function DetailPage() {
 
 function InfoSpace({ title, info }) {
   return (
-    <article className="flex gap-2 items-center mb-2">
-      <h2 className="capitalize">{title + ":"}</h2>
-      <h2 className="py-2 px-3 rounded bg-[#f8f1f1]">{info}</h2>
-    </article>
+    <table className=" w-full table-fixed mb-2">
+      <tbody>
+        <tr>
+          <td className="md:w-1/2 w-[40%] pr-2 align-top capitalize font-semibold">
+            {title}:
+          </td>
+          <td className="bg-[#f8f1f1]">
+            <div className="md:w-1/2 w-[60%] text-wrap py-2 px-3 rounded">
+              {info}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   );
 }

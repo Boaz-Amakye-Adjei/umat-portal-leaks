@@ -19,6 +19,7 @@ export default function StudentList() {
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setIsError] = useState(false);
+  const [totalStudents, setTotalStudents] = useState(0);
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -32,6 +33,7 @@ export default function StudentList() {
         if (response.ok) {
           setStudents(data.data);
           setTotalPages(data.totalPages);
+          setTotalStudents(data.totalStudent);
         } else {
           console.error("Error fetching students:", data.error);
           setIsError(true);
@@ -59,7 +61,12 @@ export default function StudentList() {
     <div>
       <Search />
 
-      <RenderCards students={students} isLoading={isLoading} error={error} />
+      <RenderCards
+        totalStudents={totalStudents}
+        students={students}
+        isLoading={isLoading}
+        error={error}
+      />
 
       <PaginationComponent
         currentPage={page}
